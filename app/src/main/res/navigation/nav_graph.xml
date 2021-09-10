@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.anitultimateteambuilder.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_playersFragment"
+            app:destination="@id/playersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_teamBuilderFragment2"
+            app:destination="@id/teamBuilderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playersFragment"
+        android:name="com.example.anitultimateteambuilder.players.PlayersFragment"
+        android:label="PlayersFragment" />
+    <fragment
+        android:id="@+id/teamBuilderFragment"
+        android:name="com.example.anitultimateteambuilder.team_builder.TeamBuilderFragment"
+        android:label="TeamBuilderFragment" />
+</navigation>
