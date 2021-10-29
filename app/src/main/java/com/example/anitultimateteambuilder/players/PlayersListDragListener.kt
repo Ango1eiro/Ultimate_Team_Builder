@@ -4,7 +4,8 @@ package com.example.anitultimateteambuilder.players
 import android.view.DragEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.anitultimateteambuilder.LIST_TYPE
+
+import com.example.anitultimateteambuilder.ListType
 import com.example.anitultimateteambuilder.R
 import com.example.anitultimateteambuilder.domain.Player
 import com.example.anitultimateteambuilder.repository.Repository.Companion.getPlayersList
@@ -28,7 +29,7 @@ class PlayersListDragListener : View.OnDragListener {
                 when (viewId) {
                     flItem, rvPlayersToDistribute, rvTeamOne, rvTeamTwo, rvTeamThree -> {
                         val target: RecyclerView
-                        val source = viewSource.getParent() as RecyclerView
+                        val source = viewSource.parent.parent as RecyclerView
 
 
                         when (viewId) {
@@ -46,10 +47,10 @@ class PlayersListDragListener : View.OnDragListener {
                         val positionSource = viewSource.tag as Int
 
                         val listSource: List<Player> = when (adapterSource.listType){
-                            LIST_TYPE.LIST_PLAYERS_TO_DISTRIBUTE -> adapterSource.viewModel.playersToDistribute.value!!
-                            LIST_TYPE.LIST_TEAM_ONE -> adapterSource.viewModel.teamOne.value!!
-                            LIST_TYPE.LIST_TEAM_TWO -> adapterSource.viewModel.teamTwo.value!!
-                            LIST_TYPE.LIST_TEAM_THREE -> adapterSource.viewModel.teamThree.value!!
+                            ListType.LIST_PLAYERS_TO_DISTRIBUTE -> adapterSource.viewModel.playersToDistribute.value!!
+                            ListType.LIST_TEAM_ONE -> adapterSource.viewModel.teamOne.value!!
+                            ListType.LIST_TEAM_TWO -> adapterSource.viewModel.teamTwo.value!!
+                            ListType.LIST_TEAM_THREE -> adapterSource.viewModel.teamThree.value!!
                         }
 
                         val player: Player = listSource[positionSource]

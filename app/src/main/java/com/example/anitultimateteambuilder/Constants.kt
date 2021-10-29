@@ -1,5 +1,17 @@
 package com.example.anitultimateteambuilder
 
-enum class LIST_TYPE {
+enum class ListType {
         LIST_PLAYERS_TO_DISTRIBUTE, LIST_TEAM_ONE, LIST_TEAM_TWO, LIST_TEAM_THREE
+}
+
+enum class ShuffleAlgorithm {
+        SHUFFLE_ALGORITHM_UNIFORM, SHUFFLE_ALGORITHM_RANDOM, SHUFFLE_ALGORITHM_RANDOM_BEST_RESULT
+}
+
+enum class TeamStat{
+        TEAM_STAT_AVERAGE, TEAM_STAT_OVERALL
+}
+
+enum class PlayerRarity{
+        PLAYER_RARITY_COMMON, PLAYER_RARITY_MOMENTS, PLAYER_RARITY_LEGEND
 }

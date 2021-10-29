@@ -14,8 +14,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-
+                android:background="@color/blue"
+                app:titleTextColor="@color/white"
                 >
             </androidx.appcompat.widget.Toolbar>
 
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/drawer_view"/>
+            app:menu="@menu/drawer_view"
+            />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

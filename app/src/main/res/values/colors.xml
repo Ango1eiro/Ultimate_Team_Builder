@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grass">#50B50D</color>
+    <color name="yellow">#F8E00C</color>
+    <color name="blue">#10346A</color>
+    <!-- From material material.io  -->
+    <color name="primaryColor">#7cb342</color>
+    <color name="primaryLightColor">#aee571</color>
+    <color name="primaryDarkColor">#4b830d</color>
+    <color name="secondaryColor">#fbc02d</color>
+    <color name="secondaryLightColor">#fff263</color>
+    <color name="secondaryDarkColor">#c49000</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+    <!-- Cards  -->
+    <color name="cardBackgroundColor">#3B4350</color>
+    <color name="cardTextColor">#FFFFFF</color>
+
 </resources>

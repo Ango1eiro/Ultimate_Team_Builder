@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
+    android:layout_width="80dp"
+    android:layout_height="100dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="15sp"
-    android:layout_marginTop="15sp"
-    android:layout_marginRight="15sp"
-    android:layout_marginBottom="15sp"
+    xmlns:tools="http://schemas.android.com/tools">
+<com.google.android.material.card.MaterialCardView
+
+    android:layout_width="60dp"
+    android:layout_height="100dp"
     android:layout_gravity="center"
     app:cardCornerRadius="15dp"
     app:cardElevation="8dp"
     android:id="@+id/cvPlayerItemSmall">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="68dp"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
+            android:minLines="2"
             android:id="@+id/tvPlayerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="Player Name"
             android:textSize="10sp"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             android:id="@+id/imageViewPlayer"
-            android:layout_width="55sp"
+            android:layout_width="45sp"
             android:layout_height="45dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPlayerName"
             app:srcCompat="@drawable/ic_launcher_foreground"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/tvPlayerStats"
@@ -49,4 +57,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewPlayer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

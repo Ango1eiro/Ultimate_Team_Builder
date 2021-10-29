@@ -3,4 +3,15 @@
     <string name="players_name">Players</string>
     <string name="team_builder_name">Team builder</string>
     <string name="settings_name">Settings</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_required">Permission required</string>
+    <string name="ok">OK</string>
+    <string name="add_players">Add players</string>
+    <string name="clean_players">Clean players</string>
+    <string name="shuffle_players">Shuffle players</string>
+    <string name="shuffle_players_u">Uniformly</string>
+    <string name="shuffle_players_r">Randomly</string>
+    <string name="shuffle_players_rbr">Randomly (best result)</string>
+    <string name="share_teams">Share teams</string>
+    <string name="game_results_name">Game results</string>
 </resources>

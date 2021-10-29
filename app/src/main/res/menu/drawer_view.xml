@@ -3,5 +3,6 @@
 
     <item android:title="@string/players_name" android:id="@+id/playersFragment"/>
     <item android:title="@string/team_builder_name" android:id="@+id/teamBuilderFragment"/>
-    <item android:title="@string/settings_name" android:id="@+id/settingsFragment"/>
+    <item android:title="@string/game_results_name" android:id="@+id/gameResultsFragment"/>
+    <item android:title="@string/settings_name" android:id="@+id/mySettingsFragment"/>
 </menu>
