@@ -4,7 +4,7 @@ import android.view.MotionEvent
 import android.view.View
 import com.example.anitultimateteambuilder.team_builder.TeamBuilderViewModel
 
-open class OnSwipeTouchListener(context: Context?, viewModel: TeamBuilderViewModel) : View.OnTouchListener {
+open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
 
     private val gestureDetector = GestureDetector(context,GestureListener())
 

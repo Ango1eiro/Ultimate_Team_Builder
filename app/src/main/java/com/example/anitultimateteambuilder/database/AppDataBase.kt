@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [DataBasePlayer::class,DataBaseGameResult::class,DataBaseGameResultTeamOne::class,DataBaseGameResultTeamTwo::class], version = 5, exportSchema = false)
+@Database(entities = [DataBasePlayer::class,DataBaseGameResult::class,DataBaseGameResultTeamOne::class,DataBaseGameResultTeamTwo::class], version = 6, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -59,6 +59,11 @@ abstract class AppDatabase : RoomDatabase() {
                     }
                 }
 
+                val MIGRATION_5_6 = object : Migration(5, 6) {
+                    override fun migrate(database: SupportSQLiteDatabase) {
+                    }
+                }
+
                 var instance = INSTANCE
 
                 if (instance == null) {
@@ -71,6 +76,7 @@ abstract class AppDatabase : RoomDatabase() {
                         .addMigrations(MIGRATION_2_3)
                         .addMigrations(MIGRATION_3_4)
                         .addMigrations(MIGRATION_4_5)
+                        .addMigrations(MIGRATION_5_6)
 //                        .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance

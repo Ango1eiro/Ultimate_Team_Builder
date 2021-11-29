@@ -10,18 +10,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.anitultimateteambuilder.PlayerRarity
 import com.example.anitultimateteambuilder.R
 import com.example.anitultimateteambuilder.byteArrayToImage
 import com.example.anitultimateteambuilder.database.AppDatabase
 import com.example.anitultimateteambuilder.databinding.PlayerFragmentBinding
 import com.example.anitultimateteambuilder.domain.Player
+import com.example.anitultimateteambuilder.game_results.GameResultsAdapter
 import com.example.anitultimateteambuilder.imageUriToByteArray
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
@@ -65,6 +70,8 @@ class PlayerFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        binding.spinner.adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,PlayerRarity.values())
+
         val arguments = PlayerFragmentArgs.fromBundle(requireArguments())
         if (arguments.playerName.isEmpty()) {
             // Nothing happens
@@ -75,7 +82,7 @@ class PlayerFragment : Fragment() {
         binding.fab.setOnClickListener {
             GlobalScope.launch {
                 viewModel.savePlayerData(Player(binding.tvName.text.toString(),binding.tvStats.text.toString().toInt(),
-                    imageUriToByteArray(requireContext(),viewModel.image_uri)?: viewModel.image_ba,PlayerRarity.values()[binding.etRarity.text.toString().toInt()])
+                    imageUriToByteArray(requireContext(),viewModel.image_uri)?: viewModel.image_ba,PlayerRarity.values()[binding.spinner.selectedItemPosition])
                 )
             }
 
@@ -86,7 +93,7 @@ class PlayerFragment : Fragment() {
             binding.tvName.setText(it.name)
             binding.tvStats.setText(it.stats.toString())
             binding.ivImage.setImageBitmap(byteArrayToImage(it.image))
-            binding.etRarity.setText(it.rarity.ordinal.toString())
+            binding.spinner.setSelection(it.rarity.ordinal)
             viewModel.image_ba = it.image
         }
 
@@ -103,6 +110,46 @@ class PlayerFragment : Fragment() {
                 onClickRequestPermission(it)
             }
         }
+
+        binding.rvPlayerGames.layoutManager = LinearLayoutManager(context,
+            LinearLayoutManager.VERTICAL,false)
+        binding.rvPlayerGames.adapter = GameResultsAdapter(binding.viewModel!!,context,binding.viewModel!!.getInitialList(),
+            R.layout.game_result_item_small)
+
+        viewModel.dataBaseGameResults.observe(viewLifecycleOwner){
+            viewModel.updateGameResultsLight()
+        }
+
+        viewModel.gameResultsLight.observe(viewLifecycleOwner){
+            (binding.rvPlayerGames.adapter as GameResultsAdapter).listOfGameResultsLight = it
+            binding.rvPlayerGames.adapter!!.notifyDataSetChanged()
+        }
+
+        viewModel.navigateToGameResultId.observe(viewLifecycleOwner){ shouldNavigate ->
+            if (shouldNavigate != -1L) {
+                navController.navigate(R.id.action_playerFragment_to_gameResultFragment,
+                    bundleOf("game_result_id" to shouldNavigate)
+                )
+                viewModel.navigateToGameResultId.postValue(-1L)
+            }
+        }
+
+
+//        binding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        }
 
         layout = binding.playerLayout
         ivImage = binding.ivImage

@@ -1,6 +1,7 @@
 package com.example.anitultimateteambuilder
 
 import android.app.Application
+import android.content.Context
 import android.database.CursorWindow
 import java.lang.reflect.Field
 import kotlin.reflect.KMutableProperty
@@ -19,6 +20,12 @@ class MyApplication: Application() {
             e.printStackTrace()
         }
 
+        appContext = applicationContext
+
+    }
+
+    companion object {
+        lateinit var appContext: Context
     }
 
 

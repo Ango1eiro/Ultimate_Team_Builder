@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.anitultimateteambuilder.R
 import com.example.anitultimateteambuilder.database.AppDatabase
 import com.example.anitultimateteambuilder.database.transform
@@ -34,26 +36,27 @@ class GameResultsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.listViewGameResults.layoutManager = GridLayoutManager(context, 2)
-//        binding.listViewGameResults.adapter = GameResultsAdapter(context,binding.viewModel!!.getInitialList(),
-//            R.layout.player_item_cv) {
-//            binding.root.findNavController().navigate(
-//                (R.id.action_playersFragment_to_playerFragment),
-//                bundleOf("player_name" to it)
-//            )
-//        }
+        binding.listViewGameResults.layoutManager = LinearLayoutManager(context,
+            LinearLayoutManager.VERTICAL,false)
+        binding.listViewGameResults.adapter = GameResultsAdapter(binding.viewModel!!,context,binding.viewModel!!.getInitialList(),
+            R.layout.game_result_item)
 
-        viewModel.gameResults.observe(viewLifecycleOwner){
-            viewModel.updateGameResultsFull()
-//            (binding.listViewGameResults.adapter as GameResultsAdapter).listOfGameResults = it.map { gr -> gr.transform() }
-//            binding.listViewGameResults.adapter!!.notifyDataSetChanged()
+        viewModel.dataBaseGameResults.observe(viewLifecycleOwner){
+            viewModel.updateGameResultsLight()
         }
 
-//        viewModel.gameResultsTeams.observe(viewLifecycleOwner){
-//            viewModel.updateGameResultsFull()
-//            (binding.listViewGameResults.adapter as GameResultsAdapter).listOfGameResults = it.map { gr -> gr.transform() }
-//            binding.listViewGameResults.adapter!!.notifyDataSetChanged()
-//        }
+        viewModel.gameResultsLight.observe(viewLifecycleOwner){
+            (binding.listViewGameResults.adapter as GameResultsAdapter).listOfGameResultsLight = it
+            binding.listViewGameResults.adapter!!.notifyDataSetChanged()
+        }
+
+        viewModel.navigateToGameResult.observe(viewLifecycleOwner,
+            Observer<Boolean> { shouldNavigate ->
+                if (shouldNavigate == true) {
+                    navController.navigate(R.id.action_gameResultsFragment_to_gameResultFragment,bundleOf("game_result_id" to viewModel.navigateToGameResultId))
+                    viewModel.onNavigatedToGameResult()
+                }
+            })
 
         return binding.root
     }

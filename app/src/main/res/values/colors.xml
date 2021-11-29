@@ -5,6 +5,7 @@
     <color name="grass">#50B50D</color>
     <color name="yellow">#F8E00C</color>
     <color name="blue">#10346A</color>
+    <color name="red">#D50000</color>
     <!-- From material material.io  -->
     <color name="primaryColor">#7cb342</color>
     <color name="primaryLightColor">#aee571</color>
@@ -15,7 +16,8 @@
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
     <!-- Cards  -->
-    <color name="cardBackgroundColor">#3B4350</color>
+    <color name="cardBackgroundColor">#0091D4</color>
     <color name="cardTextColor">#FFFFFF</color>
+    <color name="teamShapeColor">#2D646465</color>
 
 </resources>

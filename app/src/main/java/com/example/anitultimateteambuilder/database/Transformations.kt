@@ -3,6 +3,7 @@ package com.example.anitultimateteambuilder.database
 import androidx.room.TypeConverter
 import com.example.anitultimateteambuilder.PlayerRarity
 import com.example.anitultimateteambuilder.domain.GameResult
+import com.example.anitultimateteambuilder.domain.GameResultLight
 import com.example.anitultimateteambuilder.domain.Player
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -22,6 +23,22 @@ fun Player.transform() = DataBasePlayer(
     stats = this.stats,
     image = this.image,
     rarity = this.rarity.ordinal
+)
+
+fun GameResult.transform() = DataBaseGameResultToInsert(
+    DataBaseGameResult(this.id,this.date,this.teamOneScore,this.teamTwoScore),
+    teamOne = this.teamOne.map { it.name },
+    teamTwo = this.teamTwo.map { it.name }
+)
+
+fun DataBaseGameResultFull.transformToLight() = GameResultLight(
+    id = this.gameResult!!.id,
+    date = this.gameResult!!.date,
+    teamOneScore = this.gameResult!!.teamOneScore,
+    teamTwoScore = this.gameResult!!.teamTwoScore,
+    teamOne = this.teamOne!!.map { it.player },
+    teamTwo = this.teamTwo!!.map { it.player }
+
 )
 
 

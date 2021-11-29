@@ -1,4 +1,5 @@
 <bitmap
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/grass_bvb"
+    android:src="@drawable/sports"
+    android:tileMode="repeat"
     android:gravity="fill"/>

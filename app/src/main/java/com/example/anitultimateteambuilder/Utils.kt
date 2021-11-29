@@ -11,6 +11,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import java.io.ByteArrayOutputStream
+import java.sql.Date
 
 fun imageUriToByteArray(context : Context, uri: Uri?) : ByteArray? {
     if (uri == null) {
@@ -53,14 +54,14 @@ fun getNameForCV(resource: Int,name: String) : String {
     val h_v2 = R.layout.player_item_cv_small_h_v2
     val h_v3 = R.layout.player_item_cv_small_h_v3
     return when(resource){
-        h_v1 -> getFirstName(name)
-        h_v2 -> getFirstName(name)
-        h_v3 -> getFirstName(name)
+        h_v1 -> getFirstName(name,8)
+        h_v2 -> getFirstName(name,8)
+        h_v3 -> getFirstName(name,8)
         else -> name
     }
 }
 
-fun getFirstName(name: String) : String {
+fun getFirstName(name: String, limit: Int) : String {
 
     var lastName: String
     var firstName: String
@@ -73,8 +74,8 @@ fun getFirstName(name: String) : String {
         firstName = name;
     }
 
-    if(firstName.length > 8){
-        firstName = firstName.substring(0,8).plus(".")
+    if(firstName.length > limit){
+        firstName = firstName.substring(0,limit).plus(".")
     }
 
     return firstName
@@ -118,4 +119,24 @@ fun setupAnimation(ad: AnimationDrawable) {
     ad.setEnterFadeDuration(2000)
     ad.setExitFadeDuration(2000)
     ad.start()
+}
+
+fun Date.toHealthyString(): String {
+    //"2000-09-25" to "25.09.20"
+    val cChars = this.toString().toCharArray();
+    val sBuilder = StringBuilder()
+
+    sBuilder.append(cChars[8])
+    sBuilder.append(cChars[9])
+    sBuilder.append(".")
+
+    sBuilder.append(cChars[5])
+    sBuilder.append(cChars[6])
+    sBuilder.append(".")
+
+    sBuilder.append(cChars[2])
+    sBuilder.append(cChars[3])
+
+    return sBuilder.toString()
+
 }

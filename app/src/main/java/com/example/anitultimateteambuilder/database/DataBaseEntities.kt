@@ -26,7 +26,7 @@ data class DataBasePlayer (
 data class DataBaseGameResult(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Long = 0,
 
     var date: Date = Date(0),
 
@@ -91,6 +91,13 @@ data class DataBaseGameResultFull(
     var teamOne : List<DataBaseGameResultTeamOne>? = listOf(DataBaseGameResultTeamOne()),
     @Relation(parentColumn = "id", entityColumn = "gameResultId")
     var teamTwo : List<DataBaseGameResultTeamTwo>? = listOf(DataBaseGameResultTeamTwo())
+)
+
+data class DataBaseGameResultToInsert(
+    @Embedded
+    var gameResult: DataBaseGameResult? = null,
+    var teamOne : List<String>,
+    var teamTwo : List<String>
 )
 
 data class DataBaseGameResultTeamTwoFull(

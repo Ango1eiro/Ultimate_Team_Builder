@@ -45,6 +45,9 @@
             android:name="player_name"
             app:argType="string"
             android:defaultValue='' />
+        <action
+            android:id="@+id/action_playerFragment_to_gameResultFragment"
+            app:destination="@id/gameResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/playersSelectionFragment"
@@ -57,5 +60,21 @@
     <fragment
         android:id="@+id/gameResultsFragment"
         android:name="com.example.anitultimateteambuilder.game_results.GameResultsFragment"
-        android:label="GameResultsFragment" />
+        android:label="GameResultsFragment" >
+        <action
+            android:id="@+id/action_gameResultsFragment_to_gameResultFragment"
+            app:destination="@id/gameResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameResultFragment"
+        android:name="com.example.anitultimateteambuilder.game_results.game_result.GameResultFragment"
+        android:label="GameResultFragment" >
+        <argument
+            android:name="game_result_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_gameResultFragment_to_playersSelectionFragment"
+            app:destination="@id/playersSelectionFragment" />
+    </fragment>
 </navigation>

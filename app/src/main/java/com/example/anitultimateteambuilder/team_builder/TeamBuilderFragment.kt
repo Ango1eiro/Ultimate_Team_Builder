@@ -109,7 +109,7 @@ class TeamBuilderFragment : Fragment() {
                 })
 
 
-        binding.clTeamBuilder.setOnTouchListener(object : OnSwipeTouchListener(context,viewModel){
+        binding.clTeamBuilder.setOnTouchListener(object : OnSwipeTouchListener(context){
             @SuppressLint("ClickableViewAccessibility")
             override fun onSwipeLeft() {
                 viewModel.setAmountOfTeams(3)
