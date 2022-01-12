@@ -20,8 +20,8 @@
             android:layout_marginRight="35sp"
             android:layout_marginBottom="95sp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="8dp"
-            >
+
+            app:cardElevation="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

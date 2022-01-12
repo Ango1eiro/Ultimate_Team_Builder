@@ -29,6 +29,12 @@ interface DatabaseDao {
     @Query("DELETE FROM players")
     fun clear()
 
+    @Query("SELECT * from players  where name > :key ORDER BY name ASC LIMIT 1")
+    fun getNextPlayer(key: String) : DataBasePlayer?
+
+    @Query("SELECT * from players  where name < :key ORDER BY name DESC LIMIT 1")
+    fun getPreviousPlayer(key: String) : DataBasePlayer?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(gameResult: DataBaseGameResult): Long
 

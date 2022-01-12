@@ -11,8 +11,10 @@ import com.example.anitultimateteambuilder.database.transform
 import com.example.anitultimateteambuilder.database.transformToLight
 import com.example.anitultimateteambuilder.domain.GameResultLight
 import com.example.anitultimateteambuilder.domain.Player
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class PlayerViewModel (
     val database: DatabaseDao,
@@ -62,6 +64,26 @@ class PlayerViewModel (
         GlobalScope.launch {
             database.insert(player.transform())
         }
+    }
+
+    fun getNextPlayerName(next: Boolean) :String? {
+        var nextPlayerName: String? = null
+        runBlocking {
+            val job = launch(Dispatchers.Default) { val cPlayer = player.value
+                if (cPlayer != null) {
+                    if (next) {
+                        nextPlayerName = database.getNextPlayer(cPlayer.name)?.name
+                    } else {
+                        nextPlayerName = database.getPreviousPlayer(cPlayer.name)?.name
+                    }
+                } else {
+                    null
+                }
+            }
+            job.join()
+
+        }
+        return nextPlayerName
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.anitultimateteambuilder.players.player
 
+import OnSwipeTouchListener
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -56,6 +58,7 @@ class PlayerFragment : Fragment() {
     private lateinit var layout: View
     private lateinit var ivImage: ImageView
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -134,22 +137,27 @@ class PlayerFragment : Fragment() {
             }
         }
 
+        binding.playerLayout.setOnTouchListener(object : OnSwipeTouchListener(context){
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onSwipeLeft() {
+                val nextPlayerName = viewModel.getNextPlayerName(true)
+                if (nextPlayerName != null)
+                {
+                    navController.navigate(R.id.action_playerFragment_self, bundleOf("player_name" to nextPlayerName))
+                }
+                super.onSwipeLeft()
+            }
 
-//        binding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                view: View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        }
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onSwipeRight() {
+                val nextPlayerName = viewModel.getNextPlayerName(false)
+                if (nextPlayerName != null)
+                {
+                    navController.navigate(R.id.action_playerFragment_self, bundleOf("player_name" to nextPlayerName))
+                }
+                super.onSwipeRight()
+            }
+        })
 
         layout = binding.playerLayout
         ivImage = binding.ivImage
