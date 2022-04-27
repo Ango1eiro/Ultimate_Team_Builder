@@ -66,6 +66,12 @@ class PlayerViewModel (
         }
     }
 
+    fun deletePlayerData(name: String) {
+        GlobalScope.launch {
+            database.deletePlayer(name)
+        }
+    }
+
     fun getNextPlayerName(next: Boolean) :String? {
         var nextPlayerName: String? = null
         runBlocking {

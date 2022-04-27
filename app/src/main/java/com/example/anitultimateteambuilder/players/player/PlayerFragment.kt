@@ -92,6 +92,14 @@ class PlayerFragment : Fragment() {
             navController.popBackStack()
         }
 
+        binding.fabDelete.setOnClickListener {
+            GlobalScope.launch {
+                viewModel.deletePlayerData(binding.tvName.text.toString())
+            }
+
+            navController.popBackStack()
+        }
+
         viewModel.player.observe(viewLifecycleOwner){
             binding.tvName.setText(it.name)
             binding.tvStats.setText(it.stats.toString())

@@ -30,6 +30,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.Cache
 import java.io.IOException
+import java.time.LocalDate
 
 class HomeFragment : Fragment() {
 
@@ -106,7 +107,9 @@ class HomeFragment : Fragment() {
 
 //                WebAccess.usingCache = viewModel.news.value?.isNotEmpty() == true
                 // Execute web request through coroutine call adapter & retrofit
-                val webResponse = WebAccess.partsApi.getNewsAsync("football","2021-11-16",
+
+                val webResponse = WebAccess.partsApi.getNewsAsync("football",
+                    LocalDate.now().minusDays(7L).toString(),
                     resources.getString(R.string.news_api_key),viewModel.cPage).await()
 
                 if (webResponse.isSuccessful) {

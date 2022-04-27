@@ -67,6 +67,8 @@ interface DatabaseDao {
     @Query("DELETE FROM game_results WHERE id = :gameResultId")
     fun deleteGameResult(gameResultId:Long)
 
+    @Query("DELETE FROM players WHERE name = :name")
+    fun deletePlayer(name:String)
 
 
 }
